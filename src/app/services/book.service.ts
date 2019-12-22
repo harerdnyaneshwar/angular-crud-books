@@ -46,4 +46,12 @@ export class BookService {
     const url = `${this.booksUrl}/${book.id}`
     return this.http.put(url,book, httpOptions)
     }
+
+
+    addBook(book:Book):Observable<Book>{
+      const url = this.booksUrl;
+      return this.http.post<Book>(url,book,httpOptions);
+
+    }
+
   }

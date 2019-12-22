@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../../models/Book';
 import {BookService} from '../../services/book.service'
+import { toUnicode } from 'punycode';
 @Component({
   selector: 'app-books',
   templateUrl: './books.component.html',
@@ -12,25 +13,26 @@ export class BooksComponent implements OnInit {
   constructor(private bookService : BookService) {  }
 
   ngOnInit() {
-    // this.books =[
-    //   {
-    //     id:1,
-    //     title:"science",
-    //     author:"Nano",
-    //     price:300
-
-    //   },
-    //   {
-    //     id:2,
-    //     title:"technology",
-    //     author:"mr 404",
-    //     price:400
-
-    //   }
-    // ]
+   
      this.bookService.getBooks().subscribe(books =>{
        this.books = books;
      });
   }
+
+  addBookData(book:Book){
+
+    //server request
+    this.bookService.addBook(book).subscribe(todo => {
+      console.log(book)
+      this.books.push(book)
+    });
+  }
+
+  deleteData(book:Book){
+    console.log("In parent deleting this ",book );
+    this.books = this.books.filter(t =>t.id!==book.id);
+  }
+  
+
 
 }

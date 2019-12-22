@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { Book } from '../../models/Book';
 import { BookService} from '../../services/book.service';
 @Component({
@@ -9,6 +9,9 @@ import { BookService} from '../../services/book.service';
 export class BookItemComponent implements OnInit {
 
   @Input() book :Book[];
+
+  @Output() deleteBookEvent : EventEmitter<Book> =new EventEmitter();
+
   constructor( private bookService : BookService) { }
 
   ngOnInit() {
@@ -31,7 +34,8 @@ export class BookItemComponent implements OnInit {
 
   }
   onDelete(book){
-    console.log("-Delete-",book.title)
+    console.log("-Deletin book-",book)
+    this.deleteBookEvent.emit(book);
 
   }
 

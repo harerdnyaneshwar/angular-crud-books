@@ -1,6 +1,8 @@
 <h1> Books list :</h1>
+<app-add-book (addBookEvent)="addBookData($event)">
 
-<app-book-item *ngFor="let book of books" [book]="book">
+</app-add-book>
+<app-book-item *ngFor="let book of books" [book]="book" (deleteBookEvent)="deleteData($event)">
 
     <!-- <li>{{book.title}}</li> -->
 </app-book-item>
